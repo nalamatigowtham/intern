@@ -73,7 +73,11 @@ export const PostController = {
 
       const { content, authorId, hashtags: hashtagNames } = value;
 
-      const post = postRepository.create({ content, authorId });
+      const post = postRepository.create({
+        content, 
+        author: { id: authorId }
+      });
+
 
       if (hashtagNames && hashtagNames.length > 0) {
         const hashtags = await Promise.all(
@@ -187,7 +191,7 @@ export const PostController = {
       }
 
       const [posts, total] = await postRepository.findAndCount({
-        where: { authorId: In(followingIds) },
+        where: { authorId: { id: In(followingIds) } },
         relations: ['author', 'hashtags', 'likes'],
         take: limit,
         skip: offset,
