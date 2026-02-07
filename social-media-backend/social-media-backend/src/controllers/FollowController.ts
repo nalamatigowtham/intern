@@ -23,7 +23,7 @@ export const FollowController = {
         order: { createdAt: 'DESC' }
       });
 
-      res.json({ follows, total, limit, offset });
+      res.json(follows);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
