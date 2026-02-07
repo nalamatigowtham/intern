@@ -25,7 +25,7 @@ export const UserController = {
         order: { createdAt: 'DESC' }
       });
 
-      res.json({ users, total, limit, offset });
+      res.json(users);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
