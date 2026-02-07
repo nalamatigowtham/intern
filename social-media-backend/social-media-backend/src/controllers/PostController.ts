@@ -25,7 +25,7 @@ export const PostController = {
         relations: ['author', 'hashtags', 'likes'],
         take: limit,
         skip: offset,
-        order: { createdAt: 'DESC' }
+        order: { createdAt: 'ASC' }
       });
 
       const postsWithCounts = posts.map(post => ({
