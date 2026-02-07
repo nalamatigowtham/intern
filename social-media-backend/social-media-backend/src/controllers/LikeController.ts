@@ -77,12 +77,12 @@ export const LikeController = {
       });
       await activityRepository.save(activity);
 
-      const createdLike = await likeRepository.findOne({
-        where: { id: like.id },
-        relations: ['user', 'post']
+      res.status(201).json({
+        id: like.id,
+        userId,
+        postId
       });
 
-      res.status(201).json(createdLike);
     } catch (error: any) {
       if (error.code === '23503') {
         return res.status(404).json({ error: 'User or Post not found' });
