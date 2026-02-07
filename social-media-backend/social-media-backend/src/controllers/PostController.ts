@@ -34,7 +34,7 @@ export const PostController = {
         likes: undefined
       }));
 
-      res.json({ posts: postsWithCounts, total, limit, offset });
+      res.json(postsWithCounts);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
