@@ -20,7 +20,7 @@ export const HashtagController = {
         order: { createdAt: 'DESC' }
       });
 
-      res.json({ hashtags, total, limit, offset });
+      res.json(hashtags);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
