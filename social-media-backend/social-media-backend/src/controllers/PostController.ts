@@ -34,7 +34,17 @@ export const PostController = {
         likes: undefined
       }));
 
-      res.json(postsWithCounts);
+      const formatted = posts.map(p => ({
+        id: p.id,
+        content: p.content,
+        authorId: p.author.id,
+        createdAt: p.createdAt,
+        updatedAt: p.updatedAt,
+        likeCount: p.likes?.length || 0
+      }));
+      
+      res.json(formatted);
+
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
@@ -191,7 +201,7 @@ export const PostController = {
       }
 
       const [posts, total] = await postRepository.findAndCount({
-        where: { authorId: { id: In(followingIds) } },
+        where: { authorId: In(followingIds) },
         relations: ['author', 'hashtags', 'likes'],
         take: limit,
         skip: offset,
