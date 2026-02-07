@@ -21,7 +21,7 @@ export const ActivityController = {
         order: { createdAt: 'DESC' }
       });
 
-      res.json({ activities, total, limit, offset });
+      res.json(activities);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
