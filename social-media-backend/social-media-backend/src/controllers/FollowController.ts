@@ -62,14 +62,17 @@ export const FollowController = {
 
       // Check if follow already exists
       const existingFollow = await followRepository.findOne({
-        where: { followerId, followingId }
+        where: { follower: { id: followerId }, following: { id: followingId } }
       });
 
       if (existingFollow) {
         return res.status(409).json({ error: 'Already following this user' });
       }
 
-      const follow = followRepository.create({ followerId, followingId });
+      const follow = followRepository.create({ 
+        follower: { id: followerId },
+        following: { id: followingId }
+      });
       await followRepository.save(follow);
 
       // Create activity
