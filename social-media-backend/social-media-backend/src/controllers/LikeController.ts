@@ -23,7 +23,7 @@ export const LikeController = {
         order: { createdAt: 'DESC' }
       });
 
-      res.json({ likes, total, limit, offset });
+      res.json(likes);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
