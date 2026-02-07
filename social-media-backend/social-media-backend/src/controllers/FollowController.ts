@@ -84,12 +84,12 @@ export const FollowController = {
       });
       await activityRepository.save(activity);
 
-      const createdFollow = await followRepository.findOne({
-        where: { id: follow.id },
-        relations: ['follower', 'following']
+      res.status(201).json({
+        id: follow.id,
+        followerId,
+        followingId
       });
 
-      res.status(201).json(createdFollow);
     } catch (error: any) {
       if (error.code === '23503') {
         return res.status(404).json({ error: 'Follower or Following user not found' });
