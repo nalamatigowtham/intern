@@ -62,7 +62,7 @@ export const FollowController = {
 
       // Check if follow already exists
       const existingFollow = await followRepository.findOne({
-        where: { follower: { id: followerId }, following: { id: followingId } }
+        where: { followerId, followingId }
       });
 
       if (existingFollow) {
