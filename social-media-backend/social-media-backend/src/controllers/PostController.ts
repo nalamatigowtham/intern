@@ -118,12 +118,12 @@ export const PostController = {
       });
       await activityRepository.save(activity);
 
-      const createdPost = await postRepository.findOne({
-        where: { id: post.id },
-        relations: ['author', 'hashtags']
+      res.status(201).json({
+        id: post.id,
+        content: post.content,
+        authorId
       });
 
-      res.status(201).json(createdPost);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
