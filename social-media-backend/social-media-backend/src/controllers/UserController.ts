@@ -22,7 +22,7 @@ export const UserController = {
       const [users, total] = await userRepository.findAndCount({
         take: limit,
         skip: offset,
-        order: { createdAt: 'DESC' }
+        order: { createdAt: 'ASC' }
       });
 
       res.json(users);
